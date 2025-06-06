@@ -6,3 +6,5 @@ app = Flask(__name__)
 def home():
     return "Hello, Library!"
 
+if __name__ == "__main__":
+    app.run()
