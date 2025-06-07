@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('templates/index.html')
 @app.route('/handle_click',methods = ['POST'])
 def handle_click():
     print("Button was clicked!")
