@@ -1,0 +1,116 @@
+ body, html {
+      margin: 0;
+      height: 100%;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-areas:
+        "header header header"
+        "main main main"
+        "left   center right"
+        "footer footer footer";
+      grid-template-rows: 5% 5% 1fr 5%;
+      grid-template-columns: 25% 1fr 25%;
+      height: 100vh;
+    }
+
+   /* .center-container {
+        display: grid;
+        grid-template-areas: 
+        "center-header center-header center-header"
+        "center-main center-main center-right" ;
+        grid-template-rows: 5% 5% 1fr 5%;
+      grid-template-columns: 25% 1fr 25%;
+    }*/
+    .center-right{
+        text-align: right;
+        margin-right: 60px;
+    }
+    .header {
+        grid-area: header;
+        background: #404138;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 25%;
+}
+
+
+    .header-left{
+        
+    }
+
+    .header-right{
+        
+    }
+
+    .main{
+        grid-area: main;
+        text-align: center;
+        background: #d8e288;
+        display: flex;
+        padding: 0 25%;
+        justify-content: space-between;
+        
+    }
+
+    /*.mainBorder{
+        border: 2px gray;
+        padding: 10px;
+        border-radius: 50px 25px;
+    }*/
+
+    .left {
+      grid-area: left;
+      background: #d8dfa1;
+    }
+
+    .center {
+      grid-area: center;
+      background: #fff;
+      border: 2px grey;
+    }
+
+    .centerSearch{
+        float:left;
+    }
+    a{
+        color: grey;
+        
+    }
+
+
+    .right {
+      grid-area: right;
+      background: #d8dfa1;
+    }
+
+    .footer {
+      grid-area: footer;
+      background: #d8e288;
+      text-align: center;
+    }
+
+    select {
+  padding: 5px 10px;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+   .searchPool {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+    .myBooks {
+      background-color:#d8e288;  
+}
+
+    .centerText{
+        color: gray;
+    }
