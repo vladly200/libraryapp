@@ -6,12 +6,20 @@ import os
 app = Flask(__name__)
 load_dotenv()
 
+cert_content = os.getenv('DB_SSL_CA_CONTENT')
+
+cert_path = None
+if cert_content:
+    cert_path = '/tmp/ssl.pem'
+    with open(cert_path, 'w') as cert_file:
+        cert_file.write(cert_content)
+
 DB_CONFIG = {
     'host': os.getenv('DB_HOST'),
     'user': os.getenv('DB_USER'),
     'password': os.getenv('DB_PASSWORD'),
     'database': os.getenv('DB_NAME'),
-    'ssl': {'ca': os.getenv('DB_SSL_CA')} if os.getenv('DB_SSL_CA') else None
+    'ssl': {'ca': cert_path} if cert_path else None
 }
 
 @app.route('/')
