@@ -36,4 +36,4 @@ def search_books():
     return render_template('booksrch.html', books=books, query=query)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
