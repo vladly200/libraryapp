@@ -44,11 +44,10 @@
       <a href="https://github.com/volodymyr021983">Github</a><br>
       <!--<a href=""></a>-->
       <div class="centerSearch">
-        <form class="searchPool">
-          <label for="search"></label>
-          <input type="text" id="search">
-          <button type="submit">Search</button>
-        </form>
+<form action="{{ url_for('search_books') }}" method="get">
+  <input type="text" name="search" placeholder="Enter book name" required>
+  <button type="submit">Search</button>
+</form>
       </div>
       <br><br><br>
       <label for="accordanceOption"></label>

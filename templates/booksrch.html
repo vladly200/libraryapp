@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Book Search</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/booksrch.css') }}">
+</head>
+<body>
+  <h1>Search Books</h1>
+
+  <form method="GET">
+    <input type="text" name="search" placeholder="Enter book name" value="{{ query|default('') }}">
+    <button type="submit">Search</button>
+  </form>
+
+  {% if books %}
+    <h2>Results:</h2>
+    <ul>
+      {% for book in books %}
+        <li class="book {% if query.lower() in book[0].lower() %}highlight{% endif %}">
+          <strong>{{ book[0] }}</strong><br>
+          Author: {{ book[2] }}<br>
+          Year: {{ book[1] }}<br>
+          <img src="{{ book[3] }}" alt="Book cover" class="book-image">
+        </li>
+      {% endfor %}
+    </ul>
+  {% elif query %}
+    <p>No books found matching "{{ query }}".</p>
+  {% endif %}
+</body>
+</html>
