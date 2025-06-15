@@ -7,24 +7,13 @@ import os
 app = Flask(__name__)
 load_dotenv()
 
-cert_content = os.getenv('DB_SSL_CA_CONTENT')
-cert_path = None
-
-if cert_content:
-    # Создаем временный файл и записываем туда сертификат
-    tmp_file = tempfile.NamedTemporaryFile(delete=False)
-    tmp_file.write(cert_content.encode('utf-8'))
-    tmp_file.close()
-    cert_path = tmp_file.name
-else:
-    cert_path = None
-
 DB_CONFIG = {
-    'host': os.getenv('DB_HOST'),
-    'user': os.getenv('DB_USER'),
-    'password': os.getenv('DB_PASSWORD'),
-    'database': os.getenv('DB_NAME'),
-    'ssl': {'ca': cert_path} if cert_path else None
+    'host': os.getenv('DB_HOST', 'localhost'),
+    'user': os.getenv('DB_USER', 'youruser'),
+    'password': os.getenv('DB_PASSWORD', 'yourpassword'),
+    'database': os.getenv('DB_NAME', 'yourdatabase'),
+    'port': int(os.getenv('DB_PORT', 3306)),
+    'ssl': {'ca': os.getenv('SSL_CA')} if os.getenv('SSL_CA') else None
 }
 
 @app.route('/')
