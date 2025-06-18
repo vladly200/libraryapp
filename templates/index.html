@@ -28,6 +28,8 @@
   function changeLanguage(select) {
     const url = select.value;
     window.location.href = url;
+
+
   }
 </script>
 
@@ -37,7 +39,9 @@
     <div class="main">
     
       <p>ZUT Library</p>
-      <button type="button" class="myBooks"><a href="">My Books</a></button>
+      <a href="{{ url_for('my_books') }}" class="myBooks"> <button type="button" class="myBooks">My Books</button></a>
+
+
       <form class="searchPool">
       <label for="search">Look</label>
       <input type="text" id="search">

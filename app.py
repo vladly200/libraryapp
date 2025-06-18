@@ -29,6 +29,11 @@ def indexPL():
 def indexUA():
     return render_template('indexUA.html')
 
+@app.route('/myBooks')
+def my_books():
+    return render_template('MyBooks.html')
+
+
 @app.route('/booksrch',methods=['GET'])
 def search_books():
     query = request.args.get('search', '').strip()

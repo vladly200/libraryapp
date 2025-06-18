@@ -35,7 +35,7 @@
     <div class="main">
     
       <p>ZUT Library</p>
-      <button type="button" class="myBooks"><a href="MyBooks.html">Мої книги</a></button>
+      <a href="{{ url_for('my_books') }}" class="myBooks"> <button type="button" class="myBooks">Мої книги</a></button>
       <form class="searchPool">
       <label for="search">Шукати</label>
       <input type="text" id="search">
