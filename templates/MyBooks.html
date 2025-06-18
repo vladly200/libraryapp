@@ -15,29 +15,18 @@
       </div>
       <div class="header-right">
         <label for="LangOptions">Language</label>
-        <select id="LangOptions" onchange="changeLanguage(this)">
-  <option value="" disabled selected>Select language</option>
-  <option value="{{ url_for('home') }}">English</option>
-  <option value="{{ url_for('indexPL') }}">Polish</option>
-  <option value="{{ url_for('indexUA') }}">Ukrainian</option>
-</select>
-
-</select>
-<!--По хорошему перенести бы куда-то скрипт , но я хз куда -->
-<script>
-  function changeLanguage(select) {
-    const url = select.value;
-    window.location.href = url;
-  }
-</script>
-
+        <select id="LangOptions" name="LangOptions">
+          <option value="1">English</option>
+          <option value="2">Polish</option>
+          <option value="3">Ukranian</option>
+        </select>
       </div>
     </div>
 
     <div class="main">
     
       <p>ZUT Library</p>
-      <button type="button" class="myBooks"><a href="">My Books</a></button>
+       <a href="{{ url_for('templates', filename='MyBooks.html') }}"><button type="button" class="myBooks">My Books</button></a>
       <form class="searchPool">
       <label for="search">Look</label>
       <input type="text" id="search">
@@ -49,10 +38,7 @@
     <div class="center">
       <div class="center-container">
         <div class="center-header">
-      <header><h1 class="centerText">Search Books</h1></header>
-      <a href="">Books</a>
-      <a href="">Autors</a>
-      <a href="https://github.com/volodymyr021983">Github</a><br>
+      <header><h1 class="centerText">MyBooks</h1></header>
       <!--<a href=""></a>-->
       <div class="centerSearch">
 <form action="{{ url_for('search_books') }}" method="get">

@@ -20,6 +20,15 @@ DB_CONFIG = {
 def home():
     return render_template('index.html')
     
+
+@app.route('/pl')
+def indexPL():
+    return render_template('indexPL.html')
+
+@app.route('/ua')
+def indexUA():
+    return render_template('indexUA.html')
+
 @app.route('/booksrch',methods=['GET'])
 def search_books():
     query = request.args.get('search', '').strip()
@@ -39,3 +48,4 @@ def search_books():
 
 if __name__ == "__main__":
     app.run()
+

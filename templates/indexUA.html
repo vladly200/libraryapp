@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Library</title>
+  <title>Бібліотека</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
@@ -14,32 +14,30 @@
         <p>ZUT ARCHIVE</p>
       </div>
       <div class="header-right">
-        <label for="LangOptions">Language</label>
+        <label for="LangOptions">Мова</label>
         <select id="LangOptions" onchange="changeLanguage(this)">
   <option value="" disabled selected>Select language</option>
-  <option value="{{ url_for('home') }}">English</option>
-  <option value="{{ url_for('indexPL') }}">Polish</option>
-  <option value="{{ url_for('indexUA') }}">Ukrainian</option>
+  <option value="{{ url_for('home') }}">Англійська</option>
+  <option value="{{ url_for('indexPL') }}">Польска</option>
+  <option value="{{ url_for('indexUA') }}">Україньська</option>
 </select>
 
-</select>
-<!--По хорошему перенести бы куда-то скрипт , но я хз куда -->
+        <!--По хорошему перенести бы куда-то скрипт , но я хз куда -->
 <script>
   function changeLanguage(select) {
     const url = select.value;
     window.location.href = url;
   }
 </script>
-
       </div>
     </div>
 
     <div class="main">
     
       <p>ZUT Library</p>
-      <button type="button" class="myBooks"><a href="">My Books</a></button>
+      <button type="button" class="myBooks"><a href="MyBooks.html">Мої книги</a></button>
       <form class="searchPool">
-      <label for="search">Look</label>
+      <label for="search">Шукати</label>
       <input type="text" id="search">
       </form>
     </div>
@@ -49,9 +47,9 @@
     <div class="center">
       <div class="center-container">
         <div class="center-header">
-      <header><h1 class="centerText">Search Books</h1></header>
-      <a href="">Books</a>
-      <a href="">Autors</a>
+      <header><h1 class="centerText">Пошук книжок</h1></header>
+      <a href="">Книжки</a>
+      <a href="">Автори</a>
       <a href="https://github.com/volodymyr021983">Github</a><br>
       <!--<a href=""></a>-->
       <div class="centerSearch">
@@ -63,31 +61,31 @@
       <br><br><br>
       <label for="accordanceOption"></label>
         <select id="accordanceOption" name="accordanceOption">
-          <option value="1">Accordance</option>
+          <option value="1">Відповідність</option>
           <option value="2">Top Rated</option>
-          <option value="3">Random</option>
-          <option value="4">New</option>
-          <option value="5">More publications</option>
+          <option value="3">Випадкова</option>
+          <option value="4">Нова</option>
+          <option value="5">Найбільше публікацій</option>
         </select>
         </div>
         <div class="center-main">
           
         </div>
         <div class="center-right">
-          <b>Language</b><br><br>
-          <a href="">English</a><p></p>
-          <a href="">Polish</a><p></p>
-          <a href="">Russian</a><p></p>
-          <a href="">Ukranian</a><p></p>
-          <b>Autors</b><br><br>
+          <b>Мова</b><br><br>
+          <a href="">Англійська</a><p></p>
+          <a href="">Польска</a><p></p>
+          <a href="">Росийська</a><p></p>
+          <a href="">Україньська</a><p></p>
+          <b>Автори</b><br><br>
           <a href="">NN</a><p></p>
           <a href="">NN</a><p></p>
           <a href="">NN</a><p></p>
-          <b>Rubric</b><br><br>
-          <a href="">Catalogs</a><p></p>
-          <a href="">History</a><p></p>
-          <a href="">Biography</a><p></p>
-          <a href="">Fiction</a><p></p>
+          <b>Тип</b><br><br>
+          <a href="">Каталог</a><p></p>
+          <a href="">Історія</a><p></p>
+          <a href="">Біографія</a><p></p>
+          <a href="">Фантастика</a><p></p>
         </div>
       </div>
     </div>
