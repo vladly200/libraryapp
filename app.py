@@ -48,6 +48,8 @@ def search_books():
                 books = cursor.fetchall()
         finally:
             conn.close()
+            """
+            """
 
     return render_template('booksrch.html', books=books, query=query)
 
