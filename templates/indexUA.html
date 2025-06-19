@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Бібліотека</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<script src="{{ url_for('static' , filename='scrypt/scrypt.js')}}"></script>
 </head>
 <body>
 
@@ -20,15 +21,7 @@
   <option value="{{ url_for('home') }}">Англійська</option>
   <option value="{{ url_for('indexPL') }}">Польска</option>
   <option value="{{ url_for('indexUA') }}">Україньська</option>
-</select>
-
-        <!--По хорошему перенести бы куда-то скрипт , но я хз куда -->
-<script>
-  function changeLanguage(select) {
-    const url = select.value;
-    window.location.href = url;
-  }
-</script>
+        </select>
       </div>
     </div>
 
