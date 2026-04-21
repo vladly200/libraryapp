@@ -1,25 +1,24 @@
-from flask import Flask, render_template,request
+from flask import Flask, render_template, request
 from dotenv import load_dotenv
-import pymysql
-import tempfile
+import psycopg2
 import os
 
 app = Flask(__name__)
 load_dotenv()
 
-DB_CONFIG = {
-    'host': os.getenv('DB_HOST', 'localhost'),
-    'user': os.getenv('DB_USER', 'youruser'),
-    'password': os.getenv('DB_PASSWORD', 'yourpassword'),
-    'database': os.getenv('DB_NAME', 'yourdatabase'),
-    'port': int(os.getenv('DB_PORT', 3306)),
-    'ssl': {'ca': os.getenv('SSL_CA')} if os.getenv('SSL_CA') else None
-}
+# Универсальная функция подключения к PostgreSQL
+def get_db_connection():
+    return psycopg2.connect(
+        host=os.getenv('DB_HOST'),
+        database=os.getenv('DB_NAME'),
+        user=os.getenv('DB_USER'),
+        password=os.getenv('DB_PASSWORD'),
+        sslmode='require'  # Azure PostgreSQL требует SSL
+    )
 
 @app.route('/')
 def home():
     return render_template('index.html')
-    
 
 @app.route('/pl')
 def indexPL():
@@ -33,26 +32,26 @@ def indexUA():
 def my_books():
     return render_template('MyBooks.html')
 
-
-@app.route('/booksrch',methods=['GET'])
+@app.route('/booksrch', methods=['GET'])
 def search_books():
     query = request.args.get('search', '').strip()
     books = []
 
     if query:
-        conn = pymysql.connect(**{k: v for k, v in DB_CONFIG.items() if v is not None})
         try:
+            # Используем новую функцию подключения
+            conn = get_db_connection()
             with conn.cursor() as cursor:
-                sql = "SELECT name, year_of_release, author, cover_image_url FROM book WHERE name LIKE %s"
+                # В PostgreSQL LIKE чувствителен к регистру, ILIKE — нет (лучше для поиска)
+                sql = "SELECT name, year_of_release, author, cover_image_url FROM book WHERE name ILIKE %s"
                 cursor.execute(sql, ('%' + query + '%',))
                 books = cursor.fetchall()
-        finally:
             conn.close()
-            """
-            """
+        except Exception as e:
+            print(f"Error: {e}") # Это отобразится в логах Azure
+            return f"Database Error: {e}", 500
 
     return render_template('booksrch.html', books=books, query=query)
 
 if __name__ == "__main__":
     app.run()
-
