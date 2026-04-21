@@ -1,116 +1,132 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Library</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-<script src="{{ url_for('static' , filename='scrypt/scrypt.js')}}"></script>
-</head>
-<body>
-
-  <div class="grid-container">
-    <div class="header">
-      <div class="header-left">
-        <p>ZUT ARCHIVE</p>
-      </div>
-      <div class="header-right">
-        <label for="LangOptions">Language</label>
-        <select id="LangOptions" onchange="changeLanguage(this)">
-  <option value="" disabled selected>Select language</option>
-  <option value="{{ url_for('home') }}">English</option>
-  <option value="{{ url_for('indexPL') }}">Polish</option>
-  <option value="{{ url_for('indexUA') }}">Ukrainian</option>
-      </select>
-      </div>
-    </div>
-
-    <div class="main">
-    
-      <p>ZUT Library</p>
-      <a href="{{ url_for('my_books') }}" class="myBooks"> <button type="button" class="myBooks">My Books</button></a>
-
-
-      <form class="searchPool">
-      <label for="search">Look</label>
-      <input type="text" id="search">
-      </form>
-    </div>
-
-    <div class="left"></div>
-
-    <div class="center">
-      <div class="center-container">
-        <div class="center-header">
-      <header><h1 class="centerText">Search Books</h1></header>
-      <a href="">Books</a>
-      <a href="">Autors</a>
-      <a href="https://github.com/volodymyr021983">Github</a><br>
-      <!--<a href=""></a>-->
-      <div class="centerSearch">
-<form action="{{ url_for('search_books') }}" method="get">
-
-</form>
-      <form method="GET">
-    <input type="text" name="search" placeholder="Enter book name" value="{{ query|default('') }}">
-    <button type="submit">Search</button>
-  </form>
-
-  {% if books %}
-    <h2>Results:</h2>
-    <ul>
-      {% for book in books %}
-        <li class="book {% if query.lower() in book[0].lower() %}highlight{% endif %}">
-          <strong>{{ book[0] }}</strong><br>
-          Author: {{ book[2] }}<br>
-          Year: {{ book[1] }}<br>
-          <img src="{{ book[3] }}" alt="Book cover" class="book-image">
-        </li>
-      {% endfor %}
-    </ul>
-  {% elif query %}
-    <p>No books found matching "{{ query }}".</p>
-  {% endif %}
-      </div>
-      <br><br><br>
-      <label for="accordanceOption"></label>
-        <select id="accordanceOption" name="accordanceOption">
-          <option value="1">Accordance</option>
-          <option value="2">Top Rated</option>
-          <option value="3">Random</option>
-          <option value="4">New</option>
-          <option value="5">More publications</option>
-        </select>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Library</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <script src="{{ url_for('static' , filename='scrypt/scrypt.js')}}"></script>
+  </head>
+  <body>
+    <div class="grid-container">
+      <div class="header">
+        <div class="header-left">
+          <p>ZUT ARCHIVE</p>
         </div>
-        <div class="center-main">
-          
-        </div>
-        <div class="center-right">
-          <b>Language</b><br><br>
-          <a href="">English</a><p></p>
-          <a href="">Polish</a><p></p>
-          <a href="">Russian</a><p></p>
-          <a href="">Ukranian</a><p></p>
-          <b>Autors</b><br><br>
-          <a href="">NN</a><p></p>
-          <a href="">NN</a><p></p>
-          <a href="">NN</a><p></p>
-          <b>Rubric</b><br><br>
-          <a href="">Catalogs</a><p></p>
-          <a href="">History</a><p></p>
-          <a href="">Biography</a><p></p>
-          <a href="">Fiction</a><p></p>
+        <div class="header-right">
+          <label for="LangOptions">Language</label>
+          <select id="LangOptions" onchange="changeLanguage(this)">
+            <option value="" disabled selected>Select language</option>
+            <option value="{{ url_for('home') }}">English</option>
+            <option value="{{ url_for('indexPL') }}">Polish</option>
+            <option value="{{ url_for('indexUA') }}">Ukrainian</option>
+          </select>
         </div>
       </div>
+
+      <div class="main">
+        <p>ZUT Library</p>
+        <a href="{{ url_for('my_books') }}" class="myBooks">
+          <button type="button" class="myBooks">My Books</button></a
+        >
+
+        <form class="searchPool">
+          <label for="search">Look</label>
+          <input type="text" id="search" />
+        </form>
+      </div>
+
+      <div class="left"></div>
+
+      <div class="center">
+        <div class="center-container">
+          <div class="center-header">
+            <header><h1 class="centerText">Search Books</h1></header>
+            <a href="">Books</a>
+            <a href="">Autors</a>
+            <a href="https://github.com/volodymyr021983">Github</a><br />
+            <!--<a href=""></a>-->
+            <div class="centerSearch">
+              <form action="{{ url_for('search_books') }}" method="get"></form>
+              <form method="GET">
+                <input
+                  type="text"
+                  name="search"
+                  placeholder="Enter book name"
+                  value="{{ query|default('') }}"
+                />
+                <button type="submit">Search</button>
+              </form>
+
+              {% if books %}
+              <h2>Results:</h2>
+              <ul>
+                {% for book in books %}
+                <li
+                  class="book {% if query.lower() in book[0].lower() %}highlight{% endif %}"
+                >
+                  <strong>{{ book[0] }}</strong><br />
+                  Author: {{ book[2] }}<br />
+                  Year: {{ book[1] }}<br />
+                  <img
+                    src="{{ book[3] }}"
+                    alt="Book cover"
+                    class="book-image"
+                  />
+                </li>
+                {% endfor %}
+              </ul>
+              {% elif query %}
+              <p>No books found matching "{{ query }}".</p>
+              {% endif %}
+            </div>
+            <br /><br /><br />
+            <label for="accordanceOption"></label>
+            <select id="accordanceOption" name="accordanceOption">
+              <option value="1">Accordance</option>
+              <option value="2">Top Rated</option>
+              <option value="3">Random</option>
+              <option value="4">New</option>
+              <option value="5">More publications</option>
+            </select>
+          </div>
+          <div class="center-main"></div>
+          <div class="center-right">
+            <b>Language</b><br /><br />
+            <a href="">English</a>
+            <p></p>
+            <a href="">Polish</a>
+            <p></p>
+            <a href="">Russian</a>
+            <p></p>
+            <a href="">Ukranian</a>
+            <p></p>
+            <b>Autors</b><br /><br />
+            <a href="">NN</a>
+            <p></p>
+            <a href="">NN</a>
+            <p></p>
+            <a href="">NN</a>
+            <p></p>
+            <b>Rubric</b><br /><br />
+            <a href="">Catalogs</a>
+            <p></p>
+            <a href="">History</a>
+            <p></p>
+            <a href="">Biography</a>
+            <p></p>
+            <a href="">Fiction</a>
+            <p></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="right"></div>
+
+      <div class="footer">Vladly200</div>
     </div>
-
-    <div class="right"></div>
-
-    <div class="footer">
-      Andrii Yurashchuk Volodymyr Bulyzhyn Ivan Hryhorutsa
-    </div>
-  </div>
-
-</body>
+  </body>
 </html>
