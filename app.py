@@ -1,36 +1,7 @@
-import os
-import pymysql
-from flask import Flask, render_template, request
-from dotenv import load_dotenv
-
-load_dotenv()
-
-app = Flask(__name__)
-
-def get_db_connection():
-    # Azure MySQL Flexible Server требует SSL. 
-    # Эти настройки — самый надежный вариант.
-    return pymysql.connect(
-        host=os.getenv('DB_HOST'),
-        user=os.getenv('DB_USER'),
-        password=os.getenv('DB_PASSWORD'),
-        database=os.getenv('DB_NAME'),
-        port=3306,
-        cursorclass=pymysql.cursors.DictCursor,
-        connect_timeout=10,
-        ssl={'ssl': {}} 
-    )
-
-@app.route('/')
-def home():
-    return "Сайт работает! <a href='/booksrch'>Перейти к поиску</a>"
-
 @app.route('/booksrch', methods=['GET'])
 def search_books():
     query = request.args.get('search', '').strip()
     books = []
-    error = None
-    
     if query:
         try:
             conn = get_db_connection()
@@ -40,9 +11,12 @@ def search_books():
                 books = cursor.fetchall()
             conn.close()
         except Exception as e:
-            error = str(e) # Если база не подключится, мы увидим причину
-            
-    return render_template('booksrch.html', books=books, query=query, error=error)
-
-if __name__ == "__main__":
-    app.run()
+            # Если база не пустит, ты увидишь причину прямо на сайте!
+            return f"""
+            <div style="color: red; border: 1px solid red; padding: 20px;">
+                <h1>Ошибка подключения к базе:</h1>
+                <p>{str(e)}</p>
+                <p>Проверь DB_USER и DB_PASSWORD в настройках Azure!</p>
+            </div>
+            """
+    return render_template('booksrch.html', books=books, query=query)
